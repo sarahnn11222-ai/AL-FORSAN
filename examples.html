@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أمثلة الرول بلاي | الفرسان</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+ <header class="header">
+
+        <button class="menu-btn" onclick="toggleMenu()">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+<div class="discord-account">
+
+  <a href="/.netlify/functions/discord-login"
+     class="discord-btn"
+     id="discordLoginBtn">
+    دخول Discord
+    <i class="fa-brands fa-discord"></i>
+  </a>
+
+  <div id="discordUser" hidden>
+    <img id="discordAvatar" src="" alt="صورة الحساب">
+    <span id="discordUsername"></span>
+    <button id="discordLogoutBtn">تسجيل الخروج</button>
+  </div>
+
+</div>
+        <div class="brand">
+            <span>الفرسان</span>
+            <img src="images/logo.png" alt="شعار الفرسان">
+        </div>
+
+    </header>
+
+<div class="menu-overlay" id="menuOverlay">
+    <aside class="side-menu">
+        <button class="close-menu" onclick="toggleMenu()">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="side-menu-links">
+            <a href="index.html">الرئيسية</a>
+            <a href="rules.html">القوانين</a>
+            <a href="examples.html" class="active">أمثلة الرول بلاي</a>
+            <a href="apply.html">التقديم</a>
+        </div>
+    </aside>
+</div>
+
+<main class="examples-page">
+
+    <section class="examples-heading">
+        <h1><i class="fa-solid fa-masks-theater"></i> أمثلة الرول بلاي</h1>
+        <p>
+            أهم مصطلحات الرول بلاي في سيرفر الفرسان
+            مع أمثلة صحيحة وخاطئة لكل مصطلح
+        </p>
+    </section>
+
+    <section class="rp-warning">
+        <div class="warning-icon">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+        </div>
+
+        <h2>سيرفر الفرسان مساحة لعب أدوار وليس محاكاة للواقع</h2>
+
+        <p>
+            كل ما يحدث داخل السيرفر هو قصص وشخصيات خيالية
+            يصنعها اللاعبون معاً. لا نحاول نقل الواقع كما هو،
+            ولا تمثل الأحداث أو الشخصيات أو الجهات داخل السيرفر
+            أي أشخاص أو جهات حقيقية.
+        </p>
+
+        <p>
+            المطلوب أن تكون تصرفات شخصيتك <strong>منطقية داخل عالم القصة</strong>
+            وأن تحترم تجربة غيرك، وأن تفصل تماماً بين شخصيتك كلاعب
+            وبين شخصيتك داخل اللعبة.
+        </p>
+    </section>
+
+    <section class="assistant-box">
+        <h2><i class="fa-solid fa-robot"></i> اسأل مساعد الفرسان</h2>
+
+        <p>
+            عندك سؤال عن موقف معين أو مصطلح؟
+            اكتب سؤالك وابحث عنه في أمثلة الرول بلاي.
+        </p>
+
+        <div class="assistant-message">
+            هلا! اسألني عن أي مصطلح أو موقف في الرول بلاي.
+            مثال: هل يعتبر Metagaming إذا عرفت مكان صاحبي من الديسكورد؟
+        </div>
+
+        <div class="question-buttons">
+            <button onclick="fillQuestion('وش الفرق بين RDM و VDM؟')">
+                وش الفرق بين RDM و VDM؟
+            </button>
+
+            <button onclick="fillQuestion('مت في مشهد، أقدر أرجع أنتقم؟')">
+                مت في مشهد، أقدر أرجع أنتقم؟
+            </button>
+
+            <button onclick="fillQuestion('لو انقطع النت وأنا في مطاردة وش أسوي؟')">
+                لو انقطع النت وأنا في مطاردة وش أسوي؟
+            </button>
+        </div>
+
+        <div class="assistant-input">
+            <input type="text" id="questionInput"
+            placeholder="اكتب سؤالك هنا...">
+
+            <button onclick="searchQuestion()">إرسال</button>
+        </div>
+
+        <small>
+            هذه الصفحة للتوضيح فقط، والقرار النهائي دائماً لطاقم الإدارة.
+        </small>
+    </section>
+
+    <section class="term-search">
+        <h2>ابحث عن مصطلح</h2>
+
+        <input
+            type="text"
+            id="termSearch"
+            placeholder="مثال: RDM أو الحياة الجديدة"
+            oninput="filterTerms()"
+        >
+
+        <div class="term-buttons">
+            <button onclick="showTerm('ic')">IC / OOC</button>
+            <button onclick="showTerm('cb')">Character Break</button>
+            <button onclick="showTerm('rdm')">RDM</button>
+            <button onclick="showTerm('vdm')">VDM</button>
+            <button onclick="showTerm('meta')">Metagaming</button>
+            <button onclick="showTerm('power')">Powergaming</button>
+            <button onclick="showTerm('fail')">Fail RP</button>
+            <button onclick="showTerm('fear')">Fear RP</button>
+            <button onclick="showTerm('nlr')">NLR</button>
+            <button onclick="showTerm('revenge')">Revenge RP</button>
+            <button onclick="showTerm('combat')">Combat Logging</button>
+            <button onclick="showTerm('cop')">Cop Baiting</button>
+            <button onclick="showTerm('stream')">Stream Sniping</button>
+            <button onclick="showTerm('bugs')">Exploits / Bugs</button>
+        </div>
+    </section>
+
+    <section class="terms-list">
+
+        <article class="term-card" id="ic">
+            <span class="term-number">#1</span>
+            <h2>داخل الشخصية وخارجها</h2>
+            <h3>IC / OOC</h3>
+            <p>
+                IC (In Character) هو كل ما تقوله أو تفعله شخصيتك داخل القصة.
+                و OOC (Out Of Character) هو كل ما يخصك كلاعب خارج القصة.
+                الأصل أن يبقى كلامك وتصرفاتك داخل اللعب IC.
+            </p>
+
+            <div class="correct">
+                <h3>✓ مثال صحيح</h3>
+                <p>تواجه مشكلة تقنية، فتبلغ الدعم في الديسكورد أو الشات المخصص.</p>
+            </div>
+
+            <div class="wrong">
+                <h3>✕ مثال خاطئ</h3>
+                <p>توقف المشهد وتبدأ بمناقشة أمور خارج القصة مع اللاعبين أثناء اللعب.</p>
+            </div>
+        </article>
+
+        <article class="term-card" id="cb">
+            <span class="term-number">#2</span>
+            <h2>كسر الشخصية</h2>
+            <h3>Character Break</h3>
+            <p>
+                هو الخروج من دور شخصيتك أثناء التفاعل مع الآخرين،
+                مثل الحديث عن أمور الواقع أو اللعبة كبرنامج وأنت داخل المشهد.
+            </p>
+
+            <div class="correct">
+                <h3>✓ مثال صحيح</h3>
+                <p>تتعطل سيارتك بسبب خلل في اللعبة، فتبلغ عن المشكلة خارج المشهد.</p>
+            </div>
+
+            <div class="wrong">
+                <h3>✕ مثال خاطئ</h3>
+                <p>توقف مشهدك وتقول للاعبين إنك لا تستطيع التحرك بسبب مشكلة تقنية.</p>
+            </div>
+        </article>
+
+        <article class="term-card" id="rdm">
+            <span class="term-number">#3</span>
+            <h2>القتل العشوائي</h2>
+            <h3>RDM – Random Deathmatch</h3>
+            <p>
+                قتل أو مهاجمة لاعب آخر دون سبب واضح داخل القصة،
+                ودون تفاعل أو بناء مشهد يبرر ذلك.
+            </p>
+
+            <div class="correct">
+                <h3>✓ مثال صحيح</h3>
+                <p>بعد خلاف طويل وتهديد واضح بين الطرفين، تتصاعد المواجهة ويُعطى كل طرف فرصة للرد.</p>
+            </div>
+
+            <div class="wrong">
+                <h3>✕ مثال خاطئ</h3>
+                <p>لاعب يمر بجانب شخص لا يعرفه في الشارع ويطلق عليه النار مباشرة.</p>
+            </div>
+        </article>
+
+        <article class="term-card" id="vdm">
+            <span class="term-number">#4</span>
+            <h2>القتل بالمركبات</h2>
+            <h3>VDM – Vehicle Deathmatch</h3>
+            <p>
+                استخدام المركبة كسلاح لدهس اللاعبين أو صدمهم عمداً
+                دون سبب قصصي مقبول، أو تكرار الصدم بهدف الإيذاء.
+            </p>
+
+            <div class="correct">
+                <h3>✓ مثال صحيح</h3>
+                <p>يحصل حادث غير مقصود أثناء مطاردة، فيتوقف السائق ويتفاعل مع الموقف.</p>
+            </div>
+
+            <div class="wrong">
+                <h3>✕ مثال خاطئ</h3>
+                <p>لاعب يدهس مجموعة واقفة ثم يرجع ويدهسهم مرة ثانية للضحك.</p>
+            </div>
+        </article>
+
+        <article class="term-card" id="meta">
+            <span class="term-number">#5</span>
+            <h2>استخدام المعلومات الخارجية</h2>
+            <h3>Metagaming</h3>
+            <p>
+                استخدام معلومات حصلت عليها من خارج القصة،
+                مثل الديسكورد أو البث المباشر، داخل اللعب.
+            </p>
+
+            <div class="correct">
+                <h3>✓ مثال صحيح</h3>
+                <p>تعرف من صديقك معلومة خارج اللعبة، لكن شخصيتك لا تستخدمها لأنها لم تعرفها داخل القصة.</p>
+            </div>
+
+            <div class="wrong">
+                <h3>✕ مثال خاطئ</h3>
+                <p>تشاهد بث لاعب آخر وتذهب بشخصيتك إلى مكانه مباشرة بسبب ما شاهدته.</p>
+            </div>
+        </article>
+
+        <article class="term-card" id="power">
+            <span class="term-number">#6</span>
+            <h2>فرض النتيجة</h2>
+            <h3>Powergaming</h3>
+            <p>
+                إجبار الطرف الآخر على نتيجة معينة دون إعطائه فرصة للرد،
+                أو القيام بأفعال مستحيلة أو خارقة داخل القصة.
+            </p>
+
+            <div class="correct">
+                <h3>✓ مثال صحيح</h3>
+                <p>تمسك بشخص في مشهد خطف، وتترك له فرصة يتفاعل ويقاوم أو يستسلم.</p>
+            </div>
+
+            <div class="wrong">
+                <h3>✕ مثال خاطئ</h3>
+                <p>تقيّد الشخص وتأخذ كل ما معه وترميه في البحر دون إعطائه فرصة للتفاعل.</p>
+            </div>
+        </article>
+
+        <article class="term-card" id="fail">
+            <span class="term-number">#7</span>
+            <h2>الرول بلاي الفاشل</h2>
+            <h3>Fail RP</h3>
+            <p>
+                أي تصرف غير منطقي داخل عالم القصة أو يفسد المشهد على الآخرين.
+                السيرفر لا يطلب محاكاة الواقع حرفياً، لكنه يطلب منطقاً داخل القصة.
+            </p>
+
+            <div class="correct">
+                <h3>✓ مثال صحيح</h3>
+                <p>شخصيتك تعرضت لإصابة في مشهد، فتتعامل مع الإصابة قبل الرجوع لنشاطك.</p>
+            </div>
+
+            <div class="wrong">
+                <h3>✕ مثال خاطئ</h3>
+                <p>بعد إصابة قوية تقوم شخصيتك فوراً وتكمل الركض وكأن شيئاً لم يحدث.</p>
+            </div>
+        </article>
+
+        <article class="term-card" id="fear">
+            <span class="term-number">#8</span>
+            <h2>تقدير الحياة</h2>
+            <h3>Fear RP / Value of Life</h3>
+            <p>
+                يجب أن تتصرف شخصيتك كأنها تخاف على حياتها.
+                عند التهديد الحقيقي بالسلاح أو عند تفوق الطرف الآخر عددياً،
+                تتعاون شخصيتك بدل المخاطرة غير المنطقية.
+            </p>
+
+            <div class="correct">
+                <h3>✓ مثال صحيح</h3>
+                <p>يوجه عليك شخصان السلاح ويطلبان منك رفع يديك، فترفع يديك وتحاول التفاوض بالكلام.</p>
+            </div>
+
+            <div class="wrong">
+                <h3>✕ مثال خاطئ</h3>
+                <p>تحت تهديد ثلاثة أسلحة موجهة عليك، تخرج سلاحك وتبدأ بإطلاق النار.</p>
+            </div>
+        </article>
+
+        <article class="term-card" id="nlr">
+            <span class="term-number">#9</span>
+            <h2>قاعدة الحياة الجديدة</h2>
+            <h3>NLR – New Life Rule</h3>
+            <p>
+                عندما تُعلن وفاة شخصيتك وتستيقظ في المستشفى،
+                فإنها لا تتذكر تفاصيل المشهد الذي أدى لوفاتها،
+                ولا ترجع لنفس المكان للانتقام.
+                مدة الابتعاد حسب ما تحدده الإدارة في القوانين.
+            </p>
+
+            <div class="correct">
+                <h3>✓ مثال صحيح</h3>
+                <p>تموت شخصيتك في اشتباك، وبعد الاستيقاظ تكمل يومك في مكان آخر دون تذكر من قتلك.</p>
+            </div>
+
+            <div class="wrong">
+                <h3>✕ مثال خاطئ</h3>
+                <p>تستيقظ في المستشفى وتأخذ سيارة وترجع فوراً لنفس الموقع للانتقام.</p>
+            </div>
+        </article>
+
+        <article class="term-card" id="revenge">
+            <span class="term-number">#10</span>
+            <h2>الانتقام غير المبرر</h2>
+            <h3>Revenge RP</h3>
+            <p>
+                الانتقام من شخص بسبب أحداث لا تبررها القصة،
+                أو بناء الانتقام على معلومات من خارج اللعب،
+                أو خلاف شخصي بين اللاعبين خارج السيرفر.
+            </p>
+
+            <div class="correct">
+                <h3>✓ مثال صحيح</h3>
+                <p>شخصيتك تعرضت للخيانة في صفقة، فتبني قصة انتقام تدريجية داخل اللعب مع احترام قاعدة NLR.</p>
+            </div>
+
+            <div class="wrong">
+                <h3>✕ مثال خاطئ</h3>
+                <p>لاعب تضايق من شخص في الديسكورد فيدخل السيرفر ويؤذيه دون علاقة بالقصة.</p>
+            </div>
+        </article>
+
+        <article class="term-card" id="combat">
+            <span class="term-number">#11</span>
+            <h2>الهروب بالخروج</h2>
+            <h3>Combat Logging</h3>
+            <p>
+                الخروج من السيرفر أو قطع الاتصال عمداً أثناء مشهد قائم،
+                مثل الاعتقال أو السرقة أو الاشتباك، للهروب من النتيجة
+                أو حماية أغراضك.
+            </p>
+
+            <div class="correct">
+                <h3>✓ مثال صحيح</h3>
+                <p>انقطع اتصالك فعلاً أثناء مشهد، فترجع بأسرع وقت وتبلغ الأطراف وتكمل المشهد من حيث توقف.</p>
+            </div>
+
+            <div class="wrong">
+                <h3>✕ مثال خاطئ</h3>
+                <p>تحاصرك الشرطة بعد مطاردة، فتخرج من السيرفر حتى لا يتم القبض عليك.</p>
+            </div>
+        </article>
+
+        <article class="term-card" id="cop">
+            <span class="term-number">#12</span>
+            <h2>استفزاز الشرطة</h2>
+            <h3>Cop Baiting</h3>
+            <p>
+                استفزاز الشرطة أو جرّها لمطاردة بلا هدف قصصي،
+                فقط لإشغالها أو لإحداث فوضى مما يضيع وقت الطاقم
+                ويفسد المشاهد الأخرى.
+            </p>
+
+            <div class="correct">
+                <h3>✓ مثال صحيح</h3>
+                <p>شخصيتك مطلوبة بسبب جريمة ضمن قصة واضحة، فتحصل مطاردة لها سبب وتطور ونتيجة.</p>
+            </div>
+
+            <div class="wrong">
+                <h3>✕ مثال خاطئ</h3>
+                <p>تقف أمام مركز الشرطة وتصدم سياراتهم ثم تهرب وتكرر ذلك فقط للاستفزاز.</p>
+            </div>
+        </article>
+
+        <article class="term-card" id="stream">
+            <span class="term-number">#13</span>
+            <h2>التجسس على البث</h2>
+            <h3>Stream Sniping</h3>
+            <p>
+                مشاهدة البث المباشر للاعب آخر لمعرفة مكانه أو خططه
+                واستغلال ذلك داخل اللعب. وهو شكل من أشكال Metagaming
+                ويعامل بجدية.
+            </p>
+
+            <div class="correct">
+                <h3>✓ مثال صحيح</h3>
+                <p>تتابع بث صديقك وأنت خارج السيرفر للمتعة فقط، ولا تستخدم أي معلومة منه عند دخولك.</p>
+            </div>
+
+            <div class="wrong">
+                <h3>✕ مثال خاطئ</h3>
+                <p>تفتح بث لاعب أثناء لعبك لتعرف متى يتحرك وأين يختبئ.</p>
+            </div>
+        </article>
+
+        <article class="term-card" id="bugs">
+            <span class="term-number">#14</span>
+            <h2>استغلال الثغرات</h2>
+            <h3>Exploits / Bugs</h3>
+            <p>
+                استغلال أي خلل في اللعبة أو السيرفر أو السكربتات
+                لكسب مال أو أغراض أو أفضلية غير عادلة.
+                الواجب الإبلاغ عن الثغرة للإدارة فوراً وعدم تكرارها أو نشرها.
+            </p>
+
+            <div class="correct">
+                <h3>✓ مثال صحيح</h3>
+                <p>تكتشف أن متجراً يعطيك غرضاً مجاناً بسبب خلل، فتوقف وترفع تذكرة للإدارة تشرح فيها ما حصل.</p>
+            </div>
+
+            <div class="wrong">
+                <h3>✕ مثال خاطئ</h3>
+                <p>تكتشف طريقة لتكرار المال، فتستخدمها عشرات المرات وتعلمها لأصدقائك.</p>
+            </div>
+        </article>
+
+    </section>
+
+    <section class="before-start">
+        <h2>قبل أن تبدأ</h2>
+
+        <ul>
+            <li>هذه الأمثلة للتوضيح فقط ولا تغطي كل الحالات، والحكم دائماً على روح القانون وليس حرفيته.</li>
+            <li>إذا كنت غير متأكد من تصرف ما، اسأل طاقم الإدارة قبل أن تقوم به.</li>
+            <li>قرارات الإدارة نهائية، والعقوبات تطبق حسب ما هو موضح في صفحة القوانين.</li>
+        </ul>
+
+        <a href="rules.html" class="gold-button">صفحة القوانين</a>
+        <a href="apply.html" class="gold-button">التقديم للانضمام</a>
+    </section>
+
+</main>
+
+<footer>
+    <h2>الفرسان</h2>
+    <p>سيرفر رول بلاي عربي على فايف ام</p>
+    <p>جميع الحقوق محفوظة © الفرسان</p>
+</footer>
+
+<script src="script.js"></script>
+
+<script>
+function fillQuestion(question) {
+    document.getElementById("questionInput").value = question;
+}
+
+function searchQuestion() {
+    const question = document.getElementById("questionInput").value.trim();
+
+    if (!question) {
+        alert("اكتب سؤالك أولاً");
+        return;
+    }
+
+    document.getElementById("termSearch").value = question;
+    filterTerms();
+
+    document.querySelector(".term-search").scrollIntoView({
+        behavior: "smooth"
+    });
+}
+
+function filterTerms() {
+    const value = document.getElementById("termSearch").value.toLowerCase();
+
+    document.querySelectorAll(".term-card").forEach(card => {
+        card.style.display = card.innerText.toLowerCase().includes(value)
+            ? "block"
+            : "none";
+    });
+}
+
+function showTerm(id) {
+    document.getElementById("termSearch").value = "";
+    filterTerms();
+
+    const term = document.getElementById(id);
+
+    if (term) {
+        term.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }
+}
+</script>
+
+</body>
+</html>
