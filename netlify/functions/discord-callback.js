@@ -162,20 +162,16 @@ exports.handler = async function (event) {
 
       statusCode: 302,
 
-      headers: {
+ headers: {
+  Location: siteUrl
+},
 
-        Location: siteUrl,
-
-        "Set-Cookie": [
-
-          clearStateCookie,
-
-          sessionCookie
-
-        ]
-
-      },
-
+multiValueHeaders: {
+  "Set-Cookie": [
+    clearStateCookie,
+    sessionCookie
+  ]
+},
       body: ""
 
     };
