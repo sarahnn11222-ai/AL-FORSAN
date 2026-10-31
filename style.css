@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* =========================
    الإعدادات العامة
 ========================= */
@@ -1766,4 +1767,1774 @@ header.header .discord-btn {
     justify-content: flex-start;
     margin: 0;
     flex-shrink: 0;
+=======
+/* =========================
+   الإعدادات العامة
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #190e08;
+    color: #e8c49b;
+    font-family: 'Cairo', sans-serif;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    font-family: inherit;
+}
+
+
+/* =========================
+   الشريط العلوي
+========================= */
+
+.header {
+    height: 115px;
+    background: #1c100a;
+    border-bottom: 2px solid #3c281a;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 15px 4%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    font-size: 32px;
+    font-weight: 900;
+    color: #d9aa78;
+}
+
+.brand img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.discord-btn {
+    background: #5865f2;
+    color: white;
+
+    padding: 16px 35px;
+    border-radius: 27px;
+
+    font-size: 21px;
+    font-weight: 800;
+
+    box-shadow: 0 0 25px #5865f255;
+    transition: 0.3s;
+}
+
+.discord-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 35px #5865f280;
+}
+
+.discord-btn i {
+    margin-right: 10px;
+}
+
+.menu-btn {
+    width: 75px;
+    height: 75px;
+
+    background: #302016;
+    color: #d9aa78;
+
+    border: 2px solid #65482e;
+    border-radius: 23px;
+
+    font-size: 30px;
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.menu-btn:hover {
+    background: #49301e;
+}
+
+
+/* =========================
+   القائمة الجانبية
+========================= */
+
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.65);
+
+    z-index: 999;
+
+    visibility: hidden;
+    opacity: 0;
+
+    transition: 0.3s;
+}
+
+.menu-overlay.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.side-menu {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: min(82%, 500px);
+    height: 100%;
+
+    background: linear-gradient(
+        160deg,
+        #24150d,
+        #160d08
+    );
+
+    border-left: 2px solid #503721;
+
+    transform: translateX(100%);
+    transition: 0.35s ease;
+
+    overflow-y: auto;
+}
+
+.menu-overlay.show .side-menu {
+    transform: translateX(0);
+}
+
+.close-menu {
+    width: 95px;
+    height: 95px;
+
+    margin: 25px;
+
+    background: #352317;
+    color: #d9aa78;
+
+    border: 2px solid #65482e;
+    border-radius: 25px;
+
+    font-size: 35px;
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.close-menu:hover {
+    background: #49301e;
+}
+
+.side-menu-links {
+    padding: 45px 25px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.side-menu-links a {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+
+    padding: 25px;
+
+    border-radius: 25px;
+
+    color: #e8c49b;
+
+    font-size: 25px;
+    font-weight: 800;
+
+    transition: 0.3s;
+}
+
+.side-menu-links a i {
+    font-size: 28px;
+    color: #d9aa78;
+}
+
+.side-menu-links a:hover,
+.side-menu-links a.active {
+    background: #352317;
+    border: 2px solid #65482e;
+}
+
+
+/* =========================
+   الواجهة الرئيسية
+========================= */
+
+.hero {
+    min-height: 850px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    padding: 80px 20px;
+
+    background: radial-gradient(
+        circle at center,
+        #382315 0%,
+        #21130c 45%,
+        #160d08 100%
+    );
+}
+
+.hero-content {
+    max-width: 950px;
+    width: 100%;
+}
+
+.hero-logo {
+    width: 150px;
+    height: 150px;
+
+    object-fit: contain;
+
+    margin-bottom: 35px;
+
+    filter: drop-shadow(0 0 25px #d4af3780);
+}
+
+.hero h1 {
+    font-size: clamp(45px, 8vw, 90px);
+    font-weight: 900;
+
+    color: #e8bd8d;
+
+    margin-bottom: 15px;
+}
+
+.hero h2 {
+    font-size: clamp(22px, 4vw, 38px);
+
+    margin-bottom: 35px;
+}
+
+.hero p {
+    font-size: 23px;
+    line-height: 2.2;
+
+    margin-bottom: 55px;
+}
+
+
+/* =========================
+   الأزرار
+========================= */
+
+.hero-buttons,
+.about-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.main-btn,
+.second-btn {
+    display: inline-block;
+
+    padding: 22px 38px;
+
+    border-radius: 28px;
+
+    font-size: 21px;
+    font-weight: 800;
+
+    transition: 0.3s;
+}
+
+.main-btn {
+    background: linear-gradient(
+        135deg,
+        #e0b17e,
+        #bd8a51
+    );
+
+    color: #21130b;
+}
+
+.second-btn {
+    background: #352317;
+
+    border: 3px solid #65482e;
+
+    color: #e8c49b;
+}
+
+.main-btn:hover,
+.second-btn:hover {
+    transform: translateY(-5px);
+}
+
+
+/* =========================
+   البطاقة التعريفية
+========================= */
+
+.intro {
+    padding: 100px 8%;
+}
+
+.intro-card {
+    max-width: 950px;
+
+    margin: auto;
+
+    padding: 75px 45px;
+
+    background: #28180f;
+
+    border: 2px solid #503721;
+    border-right: 8px solid #d4a36f;
+
+    border-radius: 40px;
+
+    text-align: center;
+}
+
+.icon-circle {
+    width: 130px;
+    height: 130px;
+
+    margin: 0 auto 45px;
+
+    background: #432d1d;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 48px;
+    color: #d9aa78;
+}
+
+.intro h2 {
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+.intro p {
+    font-size: 24px;
+    line-height: 2.2;
+
+    margin-bottom: 45px;
+}
+
+
+/* =========================
+   عناوين الأقسام
+========================= */
+
+.section-title {
+    text-align: center;
+
+    font-size: 58px;
+    font-weight: 900;
+
+    color: #d9aa78;
+
+    margin-bottom: 100px;
+}
+
+
+/* =========================
+   قسم لماذا الفرسان
+========================= */
+
+.features {
+    padding: 90px 8%;
+}
+
+.feature-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 45px;
+}
+
+.feature-card {
+    background: #28180f;
+
+    border: 2px solid #49301e;
+    border-radius: 55px;
+
+    padding: 70px 35px;
+
+    text-align: center;
+
+    transition: 0.3s;
+}
+
+.feature-card:hover {
+    border-color: #d9aa78;
+    transform: translateY(-5px);
+}
+
+.feature-card h3 {
+    font-size: 37px;
+    margin-bottom: 45px;
+}
+
+.feature-card p {
+    font-size: 24px;
+    line-height: 2.1;
+}
+
+
+/* =========================
+   قسم عن الفرسان
+========================= */
+
+.about {
+    padding: 110px 10%;
+    text-align: center;
+}
+
+.about p {
+    font-size: 25px;
+    line-height: 2.4;
+
+    margin-bottom: 35px;
+}
+
+.about-buttons {
+    margin-top: 60px;
+}
+
+
+/* =========================
+   التذييل
+========================= */
+
+footer {
+    background: linear-gradient(
+        #24150e,
+        #30190f
+    );
+
+    padding: 85px 8% 40px;
+
+    text-align: center;
+}
+
+.footer-content {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 50px;
+
+    padding-bottom: 75px;
+}
+
+.footer-brand img {
+    width: 100px;
+    height: 100px;
+
+    object-fit: contain;
+
+    margin-top: 20px;
+}
+
+.footer-brand h2,
+footer h3 {
+    color: #d9aa78;
+
+    font-size: 30px;
+
+    margin-bottom: 25px;
+}
+
+footer p,
+footer a {
+    font-size: 21px;
+    line-height: 2.5;
+}
+
+.footer-links a,
+.footer-contact a {
+    display: block;
+    transition: 0.3s;
+}
+
+.footer-links a:hover,
+.footer-contact a:hover {
+    color: #d9aa78;
+}
+
+.copyright {
+    border-top: 1px solid #503721;
+
+    padding-top: 35px;
+
+    font-size: 21px;
+}
+
+.powered {
+    margin-top: 20px;
+    color: #b99773;
+}
+
+
+/* =========================
+   توافق الجوال
+========================= */
+
+@media (max-width: 700px) {
+
+    .header {
+        height: 110px;
+        padding: 10px 4%;
+    }
+
+    .brand {
+        font-size: 22px;
+        gap: 5px;
+    }
+
+    .brand img {
+        width: 43px;
+        height: 43px;
+    }
+
+    .discord-btn {
+        padding: 14px 16px;
+        font-size: 16px;
+        border-radius: 20px;
+    }
+
+    .menu-btn {
+        width: 65px;
+        height: 65px;
+
+        font-size: 24px;
+        border-radius: 20px;
+    }
+
+    .side-menu {
+        width: 82%;
+    }
+
+    .close-menu {
+        width: 80px;
+        height: 80px;
+        font-size: 30px;
+    }
+
+    .side-menu-links {
+        padding: 30px 18px;
+    }
+
+    .side-menu-links a {
+        padding: 22px 15px;
+        font-size: 22px;
+        gap: 20px;
+    }
+
+    .side-menu-links a i {
+        font-size: 25px;
+    }
+
+    .hero {
+        min-height: 800px;
+        padding: 60px 20px;
+    }
+
+    .hero-logo {
+        width: 115px;
+        height: 115px;
+    }
+
+    .hero p {
+        font-size: 19px;
+        line-height: 2.1;
+    }
+
+    .main-btn,
+    .second-btn {
+        width: 90%;
+        padding: 19px 15px;
+        font-size: 18px;
+    }
+
+    .intro {
+        padding: 65px 6%;
+    }
+
+    .intro-card {
+        padding: 50px 20px;
+        border-radius: 35px;
+    }
+
+    .icon-circle {
+        width: 110px;
+        height: 110px;
+        font-size: 42px;
+    }
+
+    .intro h2 {
+        font-size: 27px;
+    }
+
+    .intro p {
+        font-size: 19px;
+        line-height: 2.2;
+    }
+
+    .section-title {
+        font-size: 42px;
+        margin-bottom: 65px;
+    }
+
+    .features {
+        padding: 70px 6%;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .feature-card {
+        padding: 55px 25px;
+        border-radius: 40px;
+    }
+
+    .feature-card h3 {
+        font-size: 31px;
+        margin-bottom: 35px;
+    }
+
+    .feature-card p {
+        font-size: 20px;
+        line-height: 2.1;
+    }
+
+    .about {
+        padding: 75px 7%;
+    }
+
+    .about p {
+        font-size: 20px;
+        line-height: 2.3;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+
+    .copyright {
+        font-size: 17px;
+    }
+
+}
+/* =========================
+   صفحة أمثلة الرول بلاي
+========================= */
+
+.examples-page {
+    width: min(100% - 32px, 850px);
+    margin: 55px auto;
+    font-family: 'Tajawal', sans-serif;
+}
+
+.examples-heading {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.examples-heading h1 {
+    color: #d9ad55;
+    font-size: 34px;
+    margin-bottom: 10px;
+}
+
+.examples-heading p {
+    color: #aaa;
+    font-size: 15px;
+    line-height: 1.9;
+}
+
+.rp-warning,
+.assistant-box,
+.term-search,
+.term-card,
+.before-start {
+    background: linear-gradient(145deg, #211d18, #171512);
+    border: 1px solid rgba(207, 163, 79, 0.2);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 22px;
+    color: #eee;
+}
+
+.rp-warning {
+    text-align: center;
+}
+
+.warning-icon {
+    color: #d9ad55;
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.examples-page h2 {
+    color: #d9ad55;
+    margin-bottom: 15px;
+}
+
+.examples-page p {
+    line-height: 2;
+    color: #c3bdb4;
+}
+
+.assistant-box {
+    text-align: center;
+}
+
+.assistant-box > h2 i {
+    margin-left: 7px;
+}
+
+.assistant-message {
+    background: #15120f;
+    border: 1px solid #403322;
+    border-radius: 12px;
+    padding: 18px;
+    text-align: right;
+    line-height: 2;
+    margin: 20px 0;
+    color: #ddd;
+}
+
+.question-buttons,
+.term-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    justify-content: center;
+    margin: 18px 0;
+}
+
+.question-buttons button,
+.term-buttons button {
+    background: #292219;
+    color: #e5c27f;
+    border: 1px solid #69512d;
+    border-radius: 9px;
+    padding: 10px 14px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.question-buttons button:hover,
+.term-buttons button:hover {
+    background: #d0a34e;
+    color: #17120a;
+}
+
+.assistant-input {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.assistant-input input,
+.term-search input {
+    background: #100e0c;
+    color: white;
+    border: 1px solid #55442c;
+    border-radius: 9px;
+    padding: 14px;
+    font-family: inherit;
+    outline: none;
+}
+
+.assistant-input input {
+    flex: 1;
+    min-width: 0;
+}
+
+.assistant-input button,
+.gold-button {
+    background: linear-gradient(135deg, #e0b75e, #a8792e);
+    color: #17120a;
+    border: none;
+    border-radius: 9px;
+    padding: 12px 20px;
+    font-family: inherit;
+    font-weight: 800;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.assistant-box small {
+    color: #888;
+    line-height: 2;
+}
+
+.term-search {
+    text-align: center;
+}
+
+.term-search input {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 10px 0;
+}
+
+.terms-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.term-card {
+    scroll-margin-top: 25px;
+}
+
+.term-number {
+    display: inline-block;
+    color: #d9ad55;
+    border: 1px solid #806334;
+    border-radius: 20px;
+    padding: 5px 13px;
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.term-card h2 {
+    margin-bottom: 5px;
+}
+
+.term-card > h3 {
+    color: #d9ad55;
+    font-size: 14px;
+    margin-top: 0;
+}
+
+.correct,
+.wrong {
+    padding: 13px 16px;
+    border-radius: 10px;
+    margin-top: 14px;
+}
+
+.correct {
+    background: rgba(34, 130, 76, 0.1);
+    border-right: 3px solid #36a269;
+}
+
+.correct h3 {
+    color: #55c68b;
+}
+
+.wrong {
+    background: rgba(180, 55, 55, 0.1);
+    border-right: 3px solid #c95353;
+}
+
+.wrong h3 {
+    color: #e36b6b;
+}
+
+.correct h3,
+.wrong h3 {
+    margin: 0 0 7px;
+    font-size: 15px;
+}
+
+.correct p,
+.wrong p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.before-start ul {
+    padding-right: 20px;
+    color: #c3bdb4;
+    line-height: 2.2;
+}
+
+.before-start li {
+    margin-bottom: 8px;
+}
+
+.before-start .gold-button {
+    margin: 10px 5px 0;
+}
+
+@media (max-width: 600px) {
+    .examples-page {
+        width: calc(100% - 24px);
+        margin: 30px auto;
+    }
+
+    .examples-heading h1 {
+        font-size: 26px;
+    }
+
+    .rp-warning,
+    .assistant-box,
+    .term-search,
+    .term-card,
+    .before-start {
+        padding: 17px;
+        border-radius: 12px;
+    }
+
+    .assistant-input {
+        flex-direction: column;
+    }
+
+    .assistant-input button {
+        width: 100%;
+    }
+
+    .question-buttons button,
+    .term-buttons button {
+        font-size: 12px;
+        padding: 9px 11px;
+    }
+
+    .term-card h2 {
+        font-size: 19px;
+    }
+
+    .examples-page p {
+        font-size: 14px;
+    }
+}
+/* تحسين تصميم الجوال لصفحة الرول بلاي */
+
+@media (max-width: 600px) {
+
+    .examples-page {
+
+        width: calc(100% - 8px);
+
+        margin: 25px auto;
+
+    }
+
+    .examples-heading h1 {
+
+        font-size: 30px;
+
+    }
+
+    .examples-heading p {
+
+        font-size: 19px;
+
+        line-height: 1.9;
+
+    }
+
+    .rp-warning,
+
+    .assistant-box,
+
+    .term-search,
+
+    .term-card,
+
+    .before-start {
+
+        background: #302014;
+
+        border: 1px solid #543b26;
+
+        border-radius: 22px;
+
+        padding: 25px 20px;
+
+        margin-bottom: 22px;
+
+    }
+
+    .rp-warning h2 {
+
+        color: #ffd04d;
+
+        font-size: 24px;
+
+        line-height: 1.7;
+
+    }
+
+    .examples-page p {
+
+        font-size: 19px;
+
+        line-height: 2.1;
+
+    }
+
+    .term-card h2 {
+
+        font-size: 25px;
+
+        color: #e8c99e;
+
+    }
+
+    .term-card > h3 {
+
+        font-size: 19px;
+
+        color: #d6a36a;
+
+    }
+
+    .correct,
+
+    .wrong {
+
+        padding: 20px;
+
+        border-radius: 18px;
+
+        margin-top: 18px;
+
+    }
+
+    .correct {
+
+        background: #292d1c;
+
+        border: 1px solid #16734d;
+
+    }
+
+    .wrong {
+
+        background: #3b211b;
+
+        border: 1px solid #8d3028;
+
+    }
+
+    .correct p,
+
+    .wrong p {
+
+        font-size: 18px;
+
+        line-height: 2;
+
+    }
+
+}
+@media (max-width: 700px) {
+
+    header {
+
+        display: flex;
+
+        flex-direction: row;
+
+        align-items: center;
+
+        justify-content: flex-start;
+
+        gap: 12px;
+
+    }
+
+    header .menu-btn {
+
+        order: 1;
+
+        flex-shrink: 0;
+
+    }
+
+    header .brand {
+
+        order: 2;
+
+        display: flex;
+
+        flex-direction: row;
+
+        align-items: center;
+
+        gap: 8px;
+
+        white-space: nowrap;
+
+        margin: 0;
+
+    }
+
+    header .brand img {
+
+        width: 42px;
+
+        height: 42px;
+
+        object-fit: contain;
+
+    }
+
+    header .discord-btn {
+
+        order: 3;
+
+        margin-right: auto;
+
+        flex-shrink: 0;
+
+    }
+
+}@media (min-width: 701px) {
+
+    header {
+
+        display: flex;
+
+        flex-direction: row;
+
+        align-items: center;
+
+        justify-content: flex-start;
+
+        gap: 20px;
+
+    }
+
+    header .menu-btn {
+
+        order: 1;
+
+        flex-shrink: 0;
+
+    }
+
+    header .brand {
+
+        order: 2;
+
+        display: flex;
+
+        flex-direction: row;
+
+        align-items: center;
+
+        gap: 10px;
+
+        margin: 0;
+
+        white-space: nowrap;
+
+    }
+
+    header .brand img {
+
+        width: 55px;
+
+        height: 55px;
+
+        object-fit: contain;
+
+    }
+
+    header .discord-btn {
+
+        order: 3;
+
+        flex-shrink: 0;
+
+    }
+
+}
+/* =========================
+
+   AL-FORSAN RULES PAGE
+
+========================= */
+
+.rules-page {
+
+    width: 100%;
+
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: 70px 25px;
+
+    direction: rtl;
+
+}
+
+.rules-hero {
+
+    text-align: center;
+
+    padding: 65px 20px;
+
+    margin-bottom: 35px;
+
+    background: linear-gradient(145deg, #21170e, #080808);
+
+    border: 1px solid rgba(212, 164, 75, 0.3);
+
+    border-radius: 20px;
+
+}
+
+.rules-hero h1 {
+
+    color: #e4b75e;
+
+    font-size: 42px;
+
+    margin: 15px 0;
+
+}
+
+.rules-hero p {
+
+    color: #c5c0b7;
+
+    font-size: 17px;
+
+    line-height: 2;
+
+}
+
+.section-label {
+
+    color: #c99b43;
+
+    letter-spacing: 3px;
+
+    font-size: 13px;
+
+}
+
+.rules-navigation {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    margin: 30px 0 60px;
+
+}
+
+.rules-navigation a {
+
+    color: #e5c27b;
+
+    background: #17130f;
+
+    border: 1px solid #72572d;
+
+    padding: 13px 20px;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    transition: 0.3s;
+
+}
+
+.rules-navigation a:hover {
+
+    background: #b58a3c;
+
+    color: #080808;
+
+}
+
+.rules-section {
+
+    margin-bottom: 65px;
+
+    scroll-margin-top: 100px;
+
+}
+
+.rules-section h2 {
+
+    color: #e4b75e;
+
+    font-size: 27px;
+
+    margin-bottom: 25px;
+
+    padding-bottom: 15px;
+
+    border-bottom: 1px solid #5c4626;
+
+}
+
+.rules-section h2 i {
+
+    margin-left: 10px;
+
+}
+
+.rules-list {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+
+}
+
+.rule-card {
+
+    background: linear-gradient(145deg, #191510, #0d0c0a);
+
+    border: 1px solid rgba(212, 164, 75, 0.22);
+
+    border-radius: 14px;
+
+    padding: 23px;
+
+    transition: 0.3s;
+
+}
+
+.rule-card:hover {
+
+    border-color: #c99b43;
+
+    transform: translateY(-3px);
+
+}
+
+.rule-card-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    margin-bottom: 15px;
+
+}
+
+.rule-card h3 {
+
+    color: #f0d49b;
+
+    font-size: 18px;
+
+    margin: 0;
+
+}
+
+.rule-level {
+
+    color: #e8bd6b;
+
+    background: rgba(185, 137, 53, 0.13);
+
+    border: 1px solid rgba(185, 137, 53, 0.35);
+
+    border-radius: 20px;
+
+    padding: 6px 12px;
+
+    font-size: 12px;
+
+}
+
+.rule-card p {
+
+    color: #bdb7ac;
+
+    line-height: 2;
+
+    font-size: 15px;
+
+    margin: 0;
+
+}
+
+@media (max-width: 700px) {
+
+    .rules-page {
+
+        padding: 35px 15px;
+
+    }
+
+    .rules-hero {
+
+        padding: 40px 15px;
+
+    }
+
+    .rules-hero h1 {
+
+        font-size: 28px;
+
+    }
+
+    .rules-hero p {
+
+        font-size: 14px;
+
+    }
+
+    .rules-navigation {
+
+        flex-direction: column;
+
+        gap: 10px;
+
+        margin-bottom: 40px;
+
+    }
+
+    .rules-navigation a {
+
+        text-align: center;
+
+    }
+
+    .rules-list {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .rules-section h2 {
+
+        font-size: 22px;
+
+    }
+
+    .rule-card {
+
+        padding: 18px;
+
+    }
+
+}
+/* الهيدر الموحد لجميع صفحات الفرسان */
+
+/* ترتيب الهيدر */
+header.header {
+display: flex;
+flex-direction: row;
+direction: rtl;
+align-items: center;
+justify-content: space-between;
+width: 100%;
+box-sizing: border-box;
+gap: 14px;
+}
+
+/* زر القائمة - أقصى اليمين */
+header.header .menu-btn {
+order: 1;
+flex-shrink: 0;
+}
+
+/* شعار واسم الفرسان - بجانب القائمة */
+header.header .brand {
+order: 2;
+display: flex;
+align-items: center;
+gap: 15px;
+margin-right: 0;
+margin-left: auto;
+}
+
+/* زر Discord - أقصى اليسار */
+header.header .discord-account {
+order: 3;
+flex-shrink: 0;
+margin-right: auto;
+margin-left: 0;
+}
+
+header.header .menu-btn {
+
+    order: 1;
+
+    flex-shrink: 0;
+
+}
+
+header.header .logo {
+
+    order: 2;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin: 0 !important;
+
+    flex-shrink: 0;
+
+    text-decoration: none;
+
+}
+
+header.header .logo img {
+
+    width: 42px;
+
+    height: 42px;
+
+    object-fit: contain;
+
+}
+
+header.header .logo span {
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    white-space: nowrap;
+
+}
+
+header.header .discord-btn {
+
+    order: 3;
+
+    margin-right: auto;
+
+    flex-shrink: 0;
+
+}
+
+@media (max-width: 700px) {
+
+    header.header {
+
+        padding: 10px 12px;
+
+        gap: 10px;
+
+    }
+
+    header.header .logo img {
+
+        width: 36px;
+
+        height: 36px;
+
+    }
+
+    header.header .logo span {
+
+        font-size: 15px;
+
+    }
+
+    header.header .discord-btn {
+
+        padding: 9px 12px;
+
+        font-size: 12px;
+
+    }
+
+}
+/* تفاصيل وأمثلة قوانين الفرسان */
+
+.rule-description {
+
+    color: #c5c0b7;
+
+    line-height: 2;
+
+    margin-bottom: 18px;
+
+}
+
+.rule-details {
+
+    background: rgba(212, 164, 75, 0.05);
+
+    border-right: 3px solid #b58a3c;
+
+    padding: 12px 18px;
+
+    margin: 15px 0;
+
+    border-radius: 8px;
+
+}
+
+.rule-details h4 {
+
+    color: #e4b75e;
+
+    margin: 0 0 12px;
+
+    font-size: 15px;
+
+}
+
+.rule-details ul {
+
+    padding-right: 20px;
+
+    margin: 0;
+
+}
+
+.rule-details li {
+
+    color: #c5c0b7;
+
+    line-height: 2;
+
+    margin-bottom: 5px;
+
+}
+
+.rule-example {
+
+    background: rgba(180, 60, 45, 0.08);
+
+    border: 1px solid rgba(180, 60, 45, 0.25);
+
+    border-radius: 9px;
+
+    padding: 14px;
+
+    margin-top: 18px;
+
+}
+
+.rule-example strong {
+
+    color: #e6a078;
+
+    display: block;
+
+    margin-bottom: 8px;
+
+}
+
+.rule-example p {
+
+    color: #c5c0b7;
+
+    line-height: 1.9;
+
+    margin: 0;
+
+}
+
+.rule-card {
+
+    height: fit-content;
+
+}
+
+/* Discord Account */
+.discord-account {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#discordUser {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+}
+
+#discordUser[hidden] {
+    display: none;
+}
+
+#discordAvatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #d4af37;
+}
+
+#discordUsername {
+    color: #d4af37;
+    font-weight: bold;
+}
+
+#discordLogoutBtn {
+    background: #d4af37;
+    color: #111;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-family: inherit;
+}
+/* إعادة زر وحساب Discord لمكانه الطبيعي */
+.header .discord-account {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0;
+    flex-shrink: 0;
+>>>>>>> 6f18e7a53cfe6de3d2dcde724461aacac04fb0bd
 }

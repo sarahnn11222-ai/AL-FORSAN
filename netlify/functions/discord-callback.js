@@ -162,7 +162,11 @@ exports.handler = async function (event) {
 
       statusCode: 302,
 
+<<<<<<< HEAD
       headers: {
+=======
+ headers: {
+>>>>>>> 6f18e7a53cfe6de3d2dcde724461aacac04fb0bd
   Location: siteUrl
 },
 
@@ -171,9 +175,13 @@ multiValueHeaders: {
     clearStateCookie,
     sessionCookie
   ]
+<<<<<<< HEAD
 
       },
 
+=======
+},
+>>>>>>> 6f18e7a53cfe6de3d2dcde724461aacac04fb0bd
       body: ""
 
     };
@@ -196,4 +204,8 @@ multiValueHeaders: {
 
   }
 
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> 6f18e7a53cfe6de3d2dcde724461aacac04fb0bd
