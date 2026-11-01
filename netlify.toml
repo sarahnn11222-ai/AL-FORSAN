@@ -1,20 +1,8 @@
-<<<<<<< HEAD
-[build]
-
-  publish = "."
+[build] 
+publish = "."
 
   functions = "netlify/functions"
 
 [build.environment]
 
-=======
-[build]
-
-  publish = "."
-
-  functions = "netlify/functions"
-
-[build.environment]
-
->>>>>>> 6f18e7a53cfe6de3d2dcde724461aacac04fb0bd
-  NODE_VERSION = "20"
+ NODE_VERSION = "20"
