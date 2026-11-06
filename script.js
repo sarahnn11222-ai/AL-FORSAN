@@ -19,7 +19,10 @@ document.addEventListener("keydown", function(event) {
 
 async function loadDiscordAccount() { 
   const loginBtn = document.getElementById("discordLoginBtn");
-  const userBox = document.getElementById("discordUser"); const avatar = document.getElementById("discordAvatar"); const username = document.getElementById("discordUsername"); const logoutBtn = document.getElementById("discordLogoutBtn");
+  const userBox = document.getElementById("discordUser");
+    const avatar = document.getElementById("discordAvatar");
+    const username = document.getElementById("discordUsername");
+    const logoutBtn = document.getElementById("discordLogoutBtn");
 const applyBtn = document.getElementById("applyBtn");
   const brandLogo = document.getElementById("brandLogo");
   if (!loginBtn || !userBox) return;
@@ -34,9 +37,10 @@ if (data.loggedIn && data.user) {
   ? "https://cdn.discordapp.com/avatars/" + data.user.id + "/" + data.user.avatar + ".png"
   : "https://cdn.discordapp.com/embed/avatars/0.png";
   avatar.src = avatarUrl;
-  if (brandLogo) brandLogo.src = avatarUrl;
+ if (brandLogo) brandLogo.hidden = true;
 } else {
   loginBtn.hidden = false;
+  if (brandLogo) brandLogo.hidden = false;
   userBox.hidden = true;
   if (applyBtn) applyBtn.hidden = true;
 }
