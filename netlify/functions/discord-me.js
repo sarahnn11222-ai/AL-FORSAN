@@ -122,8 +122,5 @@ exports.handler = async function (event) {
 
   }
 
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> 6f18e7a53cfe6de3d2dcde724461aacac04fb0bd
+
