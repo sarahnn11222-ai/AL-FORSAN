@@ -24,7 +24,7 @@ async function loadDiscordAccount() {
     const username = document.getElementById("discordUsername");
     const logoutBtn = document.getElementById("discordLogoutBtn");
 const applyBtn = document.getElementById("applyBtn");
-const homeApplyBtn = document.getElementById("homeapplybtn");
+const homeApplyBtn = document.getElementById("homeApplybtn");
   const brandLogo = document.getElementById("brandLogo");
   if (!loginBtn || !userBox) return;
 try { const response = await fetch("/.netlify/functions/discord-me"); const data = await response.json();
