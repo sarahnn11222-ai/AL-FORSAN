@@ -31,9 +31,6 @@
     دخول Discord
     <i class="fa-brands fa-discord"></i>
   </a>
-<a href="apply.html" class="discord-btn" id="applyBtn" hidden>
-    طلب الانضمام
-</a>
   <div id="discordUser" hidden>
     <img id="discordAvatar" src="" alt="صورة الحساب">
     <span id="discordUsername"></span>
@@ -120,11 +117,13 @@
                 </p>
 
                 <div class="hero-buttons">
-
-                   <a href="/.netlify/functions/discord-login" class="main-btn">
-                        تسجيل دخول عبر Discord
-                        <i class="fa-brands fa-discord"></i>
-                    </a>
+          <a href="/.netlify/functions/discord-login" class="main-btn" id="homeDiscordLoginBtn">
+         تسجيل دخول عبر Discord
+          <i class="fa-brands fa-discord"></i>
+           </a>
+                   <a href="apply.html" class="main-btn" id="homeApplyBtn" hidden>
+                 طلب الانضمام
+                 </a>
 
                     <a href="examples.html" class="second-btn">
     أمثلة الرول بلاي

@@ -24,11 +24,13 @@ async function loadDiscordAccount() {
     const username = document.getElementById("discordUsername");
     const logoutBtn = document.getElementById("discordLogoutBtn");
 const applyBtn = document.getElementById("applyBtn");
+const homeApplyBtn = document.getElementById("homeapplybtn");
   const brandLogo = document.getElementById("brandLogo");
   if (!loginBtn || !userBox) return;
 try { const response = await fetch("/.netlify/functions/discord-me"); const data = await response.json();
 if (data.loggedIn && data.user) {
   if (applyBtn) applyBtn.hidden = false;
+  if (homeApplyBtn) homeApplyBtn.hidden = false;
   loginBtn.hidden = true;
   userBox.hidden = false;
   username.textContent = data.user.username;
@@ -43,6 +45,7 @@ if (data.loggedIn && data.user) {
   if (brandLogo) brandLogo.hidden = false;
   userBox.hidden = true;
   if (applyBtn) applyBtn.hidden = true;
+  if (homeApplyBtn) homeApplyBtn.hidden = true;
 }
 } catch (error) { console.error("Discord account error:", error); }
 logoutBtn.addEventListener("click", async function () { await fetch("/.netlify/functions/discord-logout"); window.location.reload(); }); }
