@@ -1,200 +1,695 @@
+
 <!DOCTYPE html>
-
 <html lang="ar" dir="rtl">
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta charset="UTF-8">
+<title>طلب الانضمام | الفرسان</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* {
+  box-sizing: border-box;
+}
 
-    <title>طلب الانضمام | الفرسان</title>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #160f0a;
+  color: #e8c9a1;
+}
 
-    <link rel="stylesheet" href="style.css">
+/* HEADER */
 
+header {
+  background: #21150d;
+  border-bottom: 1px solid #493522;
+  padding: 25px 15px;
+  text-align: center;
+}
+
+.logo {
+  color: #d4a16b;
+  font-size: 30px;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+header p {
+  color: #9e8971;
+  margin-bottom: 0;
+}
+
+/* PAGE */
+
+.container {
+  width: min(850px, 94%);
+  margin: 35px auto;
+}
+
+/* CARDS */
+
+.card {
+  background: #2d1d12;
+  border: 1px solid #493522;
+  border-radius: 22px;
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+/* TITLE */
+
+h1 {
+  color: #d4a16b;
+  text-align: center;
+  font-size: 28px;
+  margin-top: 0;
+}
+
+.description {
+  text-align: center;
+  color: #a99578;
+  line-height: 2;
+  font-size: 16px;
+}
+
+/* PROGRESS */
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #d4a16b;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.progress {
+  height: 12px;
+  background: #432b1b;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background: #d4a16b;
+  transition: width 0.3s ease;
+}
+
+/* QUESTIONS */
+
+.question {
+  background: #2d1d12;
+  border: 2px solid #493522;
+  border-right: 7px solid #d4a16b;
+  border-radius: 35px 35px 35px 35px;
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+.question-number {
+  color: #d4a16b;
+  font-size: 27px;
+  font-weight: bold;
+  margin-bottom: 35px;
+}
+
+.question-title {
+  color: #e8c9a1;
+  font-size: 22px;
+  font-weight: bold;
+  line-height: 1.9;
+  margin-bottom: 25px;
+}
+
+/* INPUTS */
+
+textarea,
+input[type="number"],
+input[type="text"] {
+  width: 100%;
+  background: #1b100a;
+  border: 3px solid #493522;
+  border-radius: 30px;
+  padding: 18px;
+  color: #fff;
+  font-size: 18px;
+  font-family: inherit;
+  outline: none;
+  text-align: right;
+}
+
+input[type="number"],
+input[type="text"] {
+  min-height: 90px;
+}
+
+textarea {
+  min-height: 150px;
+  resize: vertical;
+  line-height: 1.9;
+}
+
+textarea:focus,
+input:focus {
+  border-color: #d4a16b;
+}
+
+textarea::placeholder,
+input::placeholder {
+  color: #806950;
+}
+
+/* QUESTION NOTE */
+
+.question-note {
+  color: #a99578;
+  font-size: 17px;
+  line-height: 2;
+  margin-top: 20px;
+  text-align: right;
+}
+
+/* WORD COUNTER */
+
+.counter {
+  text-align: left;
+  font-size: 13px;
+  color: #a99578;
+  margin-top: 10px;
+}
+
+/* RULES */
+
+.rules-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  color: #cbb69a;
+  line-height: 2;
+  font-size: 16px;
+}
+
+.rules-check input {
+  margin-top: 8px;
+  accent-color: #d4a16b;
+  width: 18px;
+  height: 18px;
+}
+
+/* BUTTONS */
+
+.buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+button {
+  flex: 1;
+  border: none;
+  border-radius: 15px;
+  padding: 18px;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.submit {
+  background: #d4a16b;
+  color: #21150d;
+}
+
+.submit:hover {
+  background: #e4b77f;
+}
+
+.cancel {
+  background: #3b2819;
+  color: #d4a16b;
+  border: 1px solid #65482c;
+}
+
+/* MESSAGE */
+
+.message {
+  display: none;
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 12px;
+  line-height: 1.9;
+  color: #e8c9a1;
+  background: #1b100a;
+  border: 1px solid #493522;
+}
+
+/* FOOTER */
+
+footer {
+  text-align: center;
+  color: #806950;
+  padding: 30px 15px;
+  font-size: 13px;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+  .container {
+    width: 94%;
+    margin: 20px auto;
+  }
+
+  .card {
+    padding: 20px;
+    border-radius: 25px;
+  }
+
+  .question {
+    padding: 22px;
+    border-radius: 30px;
+    margin-bottom: 25px;
+  }
+
+  h1 {
+    font-size: 23px;
+  }
+
+  .question-number {
+    font-size: 23px;
+    margin-bottom: 25px;
+  }
+
+  .question-title {
+    font-size: 20px;
+  }
+
+  .question-note {
+    font-size: 15px;
+  }
+
+  textarea,
+  input[type="number"],
+  input[type="text"] {
+    font-size: 16px;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+}
+</style>
 </head>
 
 <body>
 
-    <header class="header">
+<header>
+  <div class="logo">AL-FORSAN</div>
+  <p>مجتمع الفرسان للرول بلاي</p>
+</header>
 
-        <div class="brand">
+<main class="container">
 
-            <span>الفرسان</span>
+  <!-- INTRO -->
 
-            <img src="images/logo.png" alt="شعار الفرسان">
+  <section class="card">
 
-        </div>
+    <h1>طلب الانضمام إلى الفرسان</h1>
 
-    </header>
+    <p class="description">
+      أجب عن الأسئلة التالية بعناية.
+      يرجى التأكد من صحة إجاباتك قبل إرسال الطلب.
+    </p>
 
-    <main class="apply-page">
+    <div class="progress-info">
+      <span id="progressText">السؤال 1 من 16</span>
+      <span id="progressPercent">0%</span>
+    </div>
 
-        <h1>طلب الانضمام إلى الفرسان</h1>
+    <div class="progress">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
 
-        <p>نرحب بك! أجب عن الأسئلة التالية لإرسال طلبك.</p>
+  </section>
 
-        <form id="applicationForm">
+  <!-- QUESTIONS -->
 
-         Meta Gaming - ميتا قيمينق
+  <form id="applicationForm">
 
-    </label>
+    <div id="questions"></div>
 
-    <label>
+    <!-- AGREEMENT -->
 
-        <input type="radio" name="q8" value="لا أعرف">
+    <section class="card">
 
-        لا أعرف
+      <label class="rules-check">
 
-    </label>
+        <input type="checkbox" id="agreeRules" required>
 
-</div>
+        <span>
+          أقر بأنني قرأت وفهمت قوانين الفرسان،
+          وأتعهد بالالتزام بها وبجميع أنظمة الرول بلاي.
+        </span>
 
-<!-- السؤال 9 -->
+      </label>
 
-<div class="question">
+      <div class="buttons">
 
-    <label>
+        <button type="submit" class="submit">
+          إرسال الطلب
+        </button>
 
-        إذا تعرضت للقتل (Player Kill)، كيف يجب أن تتصرف بعد الرسپاون؟
+        <button
+          type="button"
+          class="cancel"
+          onclick="history.back()">
+          إلغاء
+        </button>
 
-    </label>
+      </div>
 
-    <label>
+      <div class="message" id="formMessage"></div>
 
-        <input type="radio" name="q9" value="أعود مباشرة للعب" required>
+    </section>
 
-        أعود مباشرة للعب
+  </form>
 
-    </label>
+</main>
 
-    <label>
+<footer>
+  AL-FORSAN © جميع الحقوق محفوظة
+</footer>
 
-        <input type="radio" name="q9" value="أمثل فترة العلاج والإصابة حسب شدة الموقف">
+<script>
 
-        أمثل فترة العلاج والإصابة حسب شدة الموقف
+/* QUESTIONS */
 
-    </label>
+const questions = [
 
-    <label>
+  {
+    title: "كم عمرك؟",
+    type: "number",
+    placeholder: "اكتب عمرك",
+    note: "السيرفر مخصص لمن أعمارهم 18 سنة فأكثر. الرجاء كتابة عمرك الحقيقي — الإدارة تراجع الطلبات يدويًا."
+  },
 
-        <input type="radio" name="q9" value="أهاجم القاتلين بعد الرسپاون">
+  {
+    title: "هل قرأت وفهمت جميع قوانين السيرفر؟",
+    type: "text",
+    placeholder: "اكتب إجابتك"
+  },
 
-        أهاجم القاتلين بعد الرسپاون
+  {
+    title: "ما معنى Out of Character (OOC) – خارج الشخصية؟",
+    type: "textarea"
+  },
 
-    </label>
+  {
+    title: "اشرح Meta Gaming – ميتا قيمينق بمفهومك.",
+    type: "textarea"
+  },
 
-    <label>
+  {
+    title: "اشرح Power Gaming – باور قيمينق بمفهومك.",
+    type: "textarea"
+  },
 
-        <input type="radio" name="q9" value="لا أعرف">
+  {
+    title: "ما معنى In Character (IC) – داخل الشخصية؟",
+    type: "textarea"
+  },
 
-        لا أعرف
-    </label>
-    
-          <!-- السؤال 10 -->
+  {
+    title: "إذا تعرضت لموقف خطر داخل اللعبة، مثل تهديد بالسلاح، ماذا يجب أن تفعل؟",
+    type: "textarea"
+  },
 
-<div class="question">
+  {
+    title: "إذا قتلت شخصًا آخر بدون سبب منطقي، ما نوع المخالفة؟",
+    type: "textarea"
+  },
 
-  <label for="q10">
+  {
+    title: "إذا تعرضت للقتل (Player Kill)، كيف يجب أن تتصرف بعد الريسباون؟",
+    type: "textarea"
+  },
 
-    السؤال 10: إذا اصطدمت بمركبة أخرى وأصيب لاعب، كيف يجب أن تتصرف؟
+  {
+    title: "إذا اصطدمت بمركبة أخرى وأصيب لاعب، كيف يجب أن تتصرف؟",
+    type: "textarea"
+  },
 
-  </label>
+  {
+    title: "ضع مثالًا على تطور شخصية (Character Development) تمثيلًا داخل اللعبة.",
+    type: "textarea"
+  },
 
-  <textarea id="q10" name="q10" required></textarea>
+  {
+    title: "لماذا تريد الدخول إلى مجتمع الفرسان؟",
+    type: "textarea"
+  },
 
-</div>
+  {
+    title: "اسم شخصيتك المطلوبة (يجب أن يكون الاسم واقعيًا، اسم أول وثانٍ فقط).",
+    type: "text",
+    placeholder: "الاسم الأول والثاني"
+  },
 
-<!-- السؤال 11 -->
+  {
+    title: "كم عمرك الحقيقي؟",
+    type: "number",
+    placeholder: "اكتب عمرك الحقيقي"
+  },
 
-<div class="question">
+  {
+    title: "لماذا يعتبر الالتزام بالتمثيل (Roleplay) طوال الوقت مهم داخل مفهومك؟",
+    type: "textarea"
+  },
 
-  <label for="q11">
+  {
+    title: "اكتب قصة شخصيتك وتوجهها داخل الفرسان: كيف نشأت الشخصية، ماذا حصل لها، وما هي توجهاتها؟",
+    type: "textarea"
+  }
 
-    السؤال 11: ضع مثالًا على تطور شخصية (Character Development) داخل اللعبة.
+];
 
-  </label>
 
-  <textarea id="q11" name="q11" required></textarea>
+/* CREATE QUESTIONS */
 
-</div>
+const questionsContainer =
+  document.getElementById("questions");
 
-<!-- السؤال 12 -->
 
-<div class="question">
+questions.forEach((question, index) => {
 
-  <label for="q12">
+  const number = index + 1;
 
-    السؤال 12: لماذا تريد الدخول إلى مجتمع سدير؟
+  const section = document.createElement("section");
 
-  </label>
+  section.className = "question";
 
-  <textarea id="q12" name="q12" required></textarea>
 
-</div>
+  /* QUESTION NUMBER */
 
-<!-- السؤال 13 -->
+  const questionNumber = document.createElement("div");
 
-<div class="question">
+  questionNumber.className = "question-number";
 
-  <label for="q13">
+  questionNumber.textContent =
+    `السؤال ${number} من 16`;
 
-    السؤال 13: اسم شخصيتك المطلوبة (يجب أن يكون الاسم واقعيًا، اسم أول وثاني فقط).
 
-  </label>
+  /* QUESTION TITLE */
 
-  <textarea id="q13" name="q13" required></textarea>
+  const title = document.createElement("div");
 
-</div>
+  title.className = "question-title";
 
-<!-- السؤال 14 -->
+  title.textContent = question.title;
 
-<div class="question">
 
-  <label for="q14">
+  /* INPUT */
 
-    السؤال 14: كم عمرك الحقيقي؟
+  let field;
 
-  </label>
 
-  <input type="number" id="q14" name="q14" min="1" required>
+  if (question.type === "textarea") {
 
-</div>
+    field = document.createElement("textarea");
 
-<!-- السؤال 15 -->
+    field.placeholder = "اكتب إجابتك هنا...";
 
-<div class="question">
+    field.required = true;
 
-  <label for="q15">
+    field.minLength = 10;
 
-    السؤال 15: لماذا يعتبر الالتزام بالتمثيل (Roleplay) طوال الوقت مهم داخل مفهومك؟
+  } else {
 
-  </label>
+    field = document.createElement("input");
 
-  <textarea id="q15" name="q15" required></textarea>
+    field.type = question.type;
 
-</div>
+    field.placeholder =
+      question.placeholder || "اكتب إجابتك";
 
-<!-- السؤال 16 -->
+    field.required = true;
 
-<div class="question">
+    if (question.type === "number") {
 
-  <label for="q16">
+      field.min = 1;
+      field.max = 100;
 
-    السؤال 16: اكتب هنا قصة شخصيتك وتوجهها داخل سدير، وكيف نشأت الشخصية وماذا حصل لها وما هدفها.
+    }
 
-  </label>
+  }
 
-  <textarea id="q16" name="q16" required></textarea>
 
-</div>   
+  field.name = `question${number}`;
 
-            <button type="submit">إرسال الطلب</button>
+  field.dataset.question = number;
 
-        </form>
 
-    </main>
+  /* ADD QUESTION */
+
+  section.appendChild(questionNumber);
+
+  section.appendChild(title);
+
+  section.appendChild(field);
+
+
+  /* NOTE */
+
+  if (question.note) {
+
+    const note = document.createElement("div");
+
+    note.className = "question-note";
+
+    note.textContent = question.note;
+
+    section.appendChild(note);
+
+  }
+
+
+  /* WORD COUNTER */
+
+  if (question.type === "textarea") {
+
+    const counter = document.createElement("div");
+
+    counter.className = "counter";
+
+    counter.textContent = "عدد الكلمات: 0";
+
+
+    field.addEventListener("input", () => {
+
+      const words = field.value.trim()
+        ? field.value.trim().split(/\s+/).length
+        : 0;
+
+      counter.textContent =
+        `عدد الكلمات: ${words}`;
+
+      updateProgress();
+
+    });
+
+
+    section.appendChild(counter);
+
+  } else {
+
+    field.addEventListener("input", updateProgress);
+
+  }
+
+
+  questionsContainer.appendChild(section);
+
+});
+
+
+/* PROGRESS */
+
+function updateProgress() {
+
+  const fields = [
+    ...document.querySelectorAll(
+      "#questions input, #questions textarea"
+    )
+  ];
+
+
+  const completed = fields.filter(field => {
+
+    return field.value.trim() !== "";
+
+  }).length;
+
+
+  const percent = Math.round(
+    (completed / questions.length) * 100
+  );
+
+
+  document.getElementById("progressText").textContent =
+    `تم إكمال ${completed} من 16`;
+
+
+  document.getElementById("progressPercent").textContent =
+    `${percent}%`;
+
+
+  document.getElementById("progressBar").style.width =
+    `${percent}%`;
+
+}
+
+
+/* SUBMIT */
+
+document
+  .getElementById("applicationForm")
+  .addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+
+    if (!this.checkValidity()) {
+
+      this.reportValidity();
+
+      return;
+
+    }
+
+
+    const message =
+      document.getElementById("formMessage");
+
+
+    message.style.display = "block";
+
+
+    message.textContent =
+      "تم التحقق من إجاباتك. النموذج يحتاج ربطه بخادم الفرسان حتى يتم إرسال الطلب وحفظه لدى الإدارة.";
+
+
+    message.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+
+  });
+
+</script>
 
 </body>
-
 </html>
