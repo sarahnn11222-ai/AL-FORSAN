@@ -53,8 +53,6 @@ exports.handler = async function () {
     body: ""
 
   };
-
-<<<<<<< HEAD
 };
 =======
 };
