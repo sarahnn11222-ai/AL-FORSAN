@@ -1770,3 +1770,6 @@ header.header .discord-btn {
 [hidden] {
     display: none !important;
 }
+#homeHeroButtons.logged-in #homeDiscordLoginBtn {
+  display: none !important;
+}

@@ -30,6 +30,8 @@ const homeDiscordLoginBtn = document.getElementById("homeDiscordLoginBtn");
   if (!loginBtn || !userBox) return;
 try { const response = await fetch("/.netlify/functions/discord-me"); const data = await response.json();
 if (data.loggedIn && data.user) {
+  const homeHeroButtons = document.getElementById("homeHeroButtons");
+if (homeHeroButtons) homeHeroButtons.classList.add("logged-in");
   if (applyBtn) applyBtn.hidden = false;
   if (homeApplyBtn) homeApplyBtn.hidden = false;
   loginBtn.hidden = true;
