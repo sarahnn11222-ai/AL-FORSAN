@@ -655,39 +655,64 @@ function updateProgress() {
 
 /* SUBMIT */
 
-document
-  .getElementById("applicationForm")
-  .addEventListener("submit", function(event) {
+document.getElementById("applicationForm").addEventListener("submit", async function(event) {
+event.preventDefault();
 
-    event.preventDefault();
+if (!this.checkValidity()) {
+this.reportValidity();
+return;
+}
 
+const message = document.getElementById("formMessage");
+const submitButton = this.querySelector('[type="submit"]');
 
-    if (!this.checkValidity()) {
+const answers = {};
 
-      this.reportValidity();
+this.querySelectorAll("input, textarea, select").forEach((field) => {
+if (!field.name && !field.id) return;
 
-      return;
+const question = field.closest(".question, .card")?.querySelector("label")?.textContent
+  || field.name
+  || field.id;
 
-    }
+answers[question] = field.value.trim();
+});
 
+message.style.display = "block";
+message.textContent = "جارٍ إرسال طلبك...";
 
-    const message =
-      document.getElementById("formMessage");
+if (submitButton) submitButton.disabled = true;
 
+try {
+const response = await fetch("/.netlify/functions/submit-application", {
+method: "POST",
+headers: {
+"Content-Type": "application/json"
+},
+credentials: "same-origin",
+body: JSON.stringify({ answers })
+});
 
-    message.style.display = "block";
+const result = await response.json();
 
+if (!response.ok) {
+  throw new Error(result.error || "تعذر إرسال الطلب");
+}
 
-    message.textContent =
-      "تم التحقق من إجاباتك. النموذج يحتاج ربطه بخادم الفرسان حتى يتم إرسال الطلب وحفظه لدى الإدارة.";
+message.textContent = "تم إرسال طلبك بنجاح! ";
 
+this.reset();
+} catch (error) {
+message.textContent = error.message || "تعذر إرسال الطلب، حاولي مرة أخرى.";
+} finally {
+if (submitButton) submitButton.disabled = false;
+}
 
-    message.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
-
-  });
+message.scrollIntoView({
+behavior: "smooth",
+block: "center"
+});
+});
 
 </script>
 
