@@ -1,3 +1,4 @@
+
 const crypto = require("crypto");
 
 exports.handler = async function (event) {
@@ -9,13 +10,24 @@ exports.handler = async function (event) {
   }
 
   try {
+    // إعدادات الموقع والبوت
     const secret = process.env.SESSION_SECRET;
-    const webhook = process.env.DISCORD_APPLICATION_WEBHOOK_URL;
+    const botToken = process.env.DISCORD_BOT_TOKEN;
+    const channelId = process.env.DISCORD_APPLICATION_CHANNEL_ID;
+    const supabaseUrl = process.env.SUPABASE_URL;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-    if (!secret || !webhook) {
+    if (
+      !secret ||
+      !botToken ||
+      !channelId ||
+      !supabaseUrl ||
+      !supabaseKey
+    ) {
       throw new Error("Server configuration error");
     }
 
+    // التحقق من تسجيل الدخول
     const cookies = event.headers.cookie || "";
     const match = cookies.match(/forsan_session=([^;]+)/);
 
@@ -60,6 +72,7 @@ exports.handler = async function (event) {
       throw new Error("Session expired");
     }
 
+    // استقبال الإجابات
     const data = JSON.parse(event.body || "{}");
     const answers = data.answers;
 
@@ -70,39 +83,11 @@ exports.handler = async function (event) {
     ) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ error: "بيانات الطلب غير صحيحة" })
+        body: JSON.stringify({
+          error: "بيانات الطلب غير صحيحة"
+        })
       };
     }
-
-    const username = user.username || "غير متوفر";
-    const displayName = user.global_name || username;
-
-    const avatarUrl = user.avatar
-      ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${user.avatar.startsWith("a_") ? "gif" : "png"}?size=128`
-      : null;
-
-    const accountFields = [
-      {
-        name: "اسم المستخدم في ديسكورد",
-        value: `@${username}`,
-        inline: true
-      },
-      {
-        name: "الاسم الظاهر",
-        value: displayName,
-        inline: true
-      },
-      {
-        name: "Discord ID",
-        value: user.id,
-        inline: false
-      },
-      {
-        name: "رابط الحساب",
-        value: `[فتح حساب المتقدم](https://discord.com/users/${user.id})`,
-        inline: false
-      }
-    ];
 
     const answerFields = Object.entries(answers).map(
       ([question, answer]) => ({
@@ -119,6 +104,92 @@ exports.handler = async function (event) {
       };
     }
 
+    const username = user.username || "غير متوفر";
+    const displayName = user.global_name || username;
+
+    const avatarUrl = user.avatar
+      ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${user.avatar.startsWith("a_") ? "gif" : "png"}?size=128`
+      : null;
+
+    // حفظ الطلب في Supabase
+    const saveResponse = await fetch(
+      `${supabaseUrl.replace(/\/$/, "")}/rest/v1/applications`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          apikey: supabaseKey,
+          Authorization: `Bearer ${supabaseKey}`,
+          Prefer: "return=representation"
+        },
+        body: JSON.stringify({
+          discord_id: user.id,
+          discord_username: username,
+          answers: answers,
+          status: "pending"
+        })
+      }
+    );
+
+    if (!saveResponse.ok) {
+      const errorText = await saveResponse.text();
+      console.error("Supabase save error:", errorText);
+
+      if (saveResponse.status === 409) {
+        return {
+          statusCode: 409,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            error: "لديك طلب تقديم قيد المراجعة بالفعل"
+          })
+        };
+      }
+
+      throw new Error("Could not save application");
+    }
+
+    const savedApplications = await saveResponse.json();
+    const application = savedApplications[0];
+
+    if (!application || !application.id) {
+      throw new Error("Application ID was not returned");
+    }
+
+    // تجهيز بيانات المتقدم
+    const accountFields = [
+      {
+        name: "اسم المستخدم في ديسكورد",
+        value: `@${username}`.slice(0, 1024),
+        inline: true
+      },
+      {
+        name: "الاسم الظاهر",
+        value: String(displayName).slice(0, 1024),
+        inline: true
+      },
+      {
+        name: "Discord ID",
+        value: user.id,
+        inline: false
+      },
+      {
+        name: "رقم الطلب",
+        value: String(application.id),
+        inline: false
+      },
+      {
+        name: "حالة الطلب",
+        value: "قيد المراجعة",
+        inline: false
+      },
+      {
+        name: "رابط الحساب",
+        value: `https://discord.com/users/${user.id}`,
+        inline: false
+      }
+    ];
+
+    // تقسيم الإجابات على عدة Embeds
     const embeds = [];
 
     for (let i = 0; i < answerFields.length; i += 4) {
@@ -134,9 +205,9 @@ exports.handler = async function (event) {
                 name: `المتقدم: ${displayName}`,
                 ...(avatarUrl ? { icon_url: avatarUrl } : {})
               },
-              thumbnail: avatarUrl
-                ? { url: avatarUrl }
-                : undefined,
+              ...(avatarUrl
+                ? { thumbnail: { url: avatarUrl } }
+                : {}),
               fields: [
                 ...accountFields,
                 ...answerFields.slice(i, i + 4)
@@ -147,23 +218,56 @@ exports.handler = async function (event) {
             }),
 
         footer: {
-          text: "طلب جديد من موقع AL-FORSAN"
+          text: `طلب AL-FORSAN رقم ${application.id}`
         },
 
         timestamp: new Date().toISOString()
       });
     }
 
-    const response = await fetch(webhook, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ embeds })
-    });
+    // أزرار مراجعة الطلب
+    const components = [
+      {
+        type: 1,
+        components: [
+          {
+            type: 2,
+            style: 3,
+            label: "اجتياز الأسئلة",
+            custom_id: `app:pass:${application.id}`
+          },
+          {
+            type: 2,
+            style: 4,
+            label: "رفض الطلب",
+            custom_id: `app:reject:${application.id}`
+          }
+        ]
+      }
+    ];
 
-    if (!response.ok) {
-      throw new Error("Discord webhook failed");
+    // إرسال الطلب بواسطة البوت
+    const discordResponse = await fetch(
+      `https://discord.com/api/v10/channels/${channelId}/messages`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bot ${botToken}`
+        },
+        body: JSON.stringify({
+          content: `طلب تقديم جديد من <@${user.id}>`,
+          embeds,
+          components
+        })
+      }
+    );
+
+    if (!discordResponse.ok) {
+      const errorText = await discordResponse.text();
+      console.error("Discord bot error:", errorText);
+
+      // الطلب محفوظ في Supabase حتى لو تعذر إرسال إشعار الديسكورد
     }
 
     return {
@@ -183,7 +287,7 @@ exports.handler = async function (event) {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        error: "تعذر إرسال الطلب، حاولي مرة أخرى"
+        error: "تعذر إرسال الطلب، حاول مرة أخرى"
       })
     };
   }
