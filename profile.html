@@ -14,41 +14,83 @@
 
 </head>
 
-<body>
+<body class="profile-body">
 
   <main class="profile-page">
 
-    <div class="profile-container">
+    <!— صورة الحساب —>
 
-      <section class="profile-card">
+    <section class="profile-cover">
 
-        <div class="profile-avatar">
+      <div class="profile-avatar-frame">
 
-          <img id="profileAvatar" src="" alt="صورة الحساب">
+        <img
 
-        </div>
+          id="profileAvatar"
 
-        <h1 id="profileName">جاري تحميل الحساب...</h1>
+          src=""
 
-        <p id="profileId"></p>
+          alt="صورة الحساب"
 
-        <div class="membership-status">
+        >
+
+      </div>
+
+    </section>
+
+    <!— معلومات العضو —>
+
+    <section class="profile-info">
+
+      <h1 id="profileName">جاري تحميل الحساب...</h1>
+
+      <p id="profileUsername"></p>
+
+      <div class="profile-badges">
+
+        <span class="membership-badge" id="membershipStatus">
 
           عضو غير مفعل
 
+        </span>
+
+        <span class="profile-role">
+
+          <span>♙</span>
+
+          AL-FORSAN
+
+        </span>
+
+      </div>
+
+      <p class="profile-discord-id" id="profileId"></p>
+
+    </section>
+
+    <!— طلبات التقديم —>
+
+    <section class="profile-applications">
+
+      <h2>
+
+        <span>▤</span>
+
+        طلبات التقديم
+
+      </h2>
+
+      <div id="applicationsList" class="applications-list">
+
+        <div class="applications-empty">
+
+          سيظهر سجل طلباتك هنا بعد ربط نظام حفظ الطلبات.
+
         </div>
 
-      </section>
+      </div>
 
-      <section class="applications-card">
-
-        <h2>طلبات التقديم</h2>
-
-        <p class="applications-empty">لا توجد طلبات تقديم</p>
-
-      </section>
-
-    </div>
+    </section>
 
   </main>
 
@@ -58,7 +100,17 @@
 
       try {
 
-        const response = await fetch('/.netlify/functions/discord-me');
+        const response = await fetch(
+
+          '/.netlify/functions/discord-me'
+
+        );
+
+        if (!response.ok) {
+
+          throw new Error('تعذر الاتصال بالخادم');
+
+        }
 
         const data = await response.json();
 
@@ -72,29 +124,47 @@
 
         const user = data.user;
 
-        const name = user.global_name || user.username;
+        // اسم الحساب
 
-        document.getElementById('profileName').textContent = name;
+        document.getElementById('profileName').textContent =
+
+          user.global_name || user.username || 'مستخدم Discord';
+
+        // اسم المستخدم
+
+        document.getElementById('profileUsername').textContent =
+
+          user.username || '';
+
+        // رقم ديسكورد
 
         document.getElementById('profileId').textContent =
 
           'Discord ID: ' + user.id;
 
+        // صورة الحساب
+
+        const avatar = document.getElementById('profileAvatar');
+
         if (user.avatar) {
 
-          document.getElementById('profileAvatar').src =
+          avatar.src =
 
             `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=256`;
 
         } else {
 
-          document.getElementById('profileAvatar').src =
+          const defaultAvatar = Number(user.discriminator || 0) % 5;
 
-            'https://cdn.discordapp.com/embed/avatars/0.png';
+          avatar.src =
+
+            `https://cdn.discordapp.com/embed/avatars/${defaultAvatar}.png`;
 
         }
 
       } catch (error) {
+
+        console.error('Profile Error:', error);
 
         document.getElementById('profileName').textContent =
 

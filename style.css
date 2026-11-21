@@ -1773,149 +1773,291 @@ header.header .discord-btn {
 #homeHeroButtons.logged-in #homeDiscordLoginBtn {
   display: none !important;
 }
-/* ===== Profile Page ===== */
+/* =================================
+
+   AL-FORSAN - PROFILE PAGE
+
+================================= */
+
+.profile-body {
+
+  min-height: 100vh;
+
+  background: #160b06;
+
+  color: #f0c99f;
+
+}
 
 .profile-page {
 
-  min-height: 80vh;
+  width: min(1100px, 92%);
 
-  padding: 60px 20px;
+  margin: auto;
 
-}
-
-.profile-container {
-
-  width: 100%;
-
-  max-width: 850px;
-
-  margin: 0 auto;
+  padding: 40px 0 80px;
 
 }
 
-.profile-card,
+/* صورة الحساب */
 
-.applications-card {
+.profile-cover {
 
-  background: #fff;
+  min-height: 250px;
 
-  border: 1px solid #e8e8e8;
+  background: linear-gradient(135deg, #382013, #1c100a);
 
-  border-radius: 18px;
+  border: 1px solid rgba(211, 164, 113, .15);
 
-  padding: 30px;
+  border-radius: 18px 18px 0 0;
 
-  margin-bottom: 25px;
+  display: flex;
 
-  text-align: center;
+  align-items: center;
 
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+  padding: 40px 55px;
 
 }
 
-.profile-avatar {
+.profile-avatar-frame {
 
-  width: 110px;
+  width: 145px;
 
-  height: 110px;
+  height: 145px;
 
-  margin: 0 auto 18px;
+  padding: 5px;
 
   border-radius: 50%;
 
-  overflow: hidden;
+  background: #b98a5d;
 
-  background: #eee;
+  overflow: hidden;
 
 }
 
-.profile-avatar img {
+.profile-avatar-frame img {
 
   width: 100%;
 
   height: 100%;
 
+  display: block;
+
+  border-radius: 50%;
+
   object-fit: cover;
 
 }
 
-.profile-card h1 {
+/* معلومات الحساب */
 
-  font-size: 24px;
+.profile-info {
 
-  margin: 10px 0;
+  background: #28180f;
 
-}
+  padding: 35px 45px;
 
-#profileId {
-
-  color: #888;
-
-  font-size: 13px;
-
-  direction: ltr;
-
-}
-
-.membership-status {
-
-  display: inline-block;
-
-  margin-top: 15px;
-
-  padding: 9px 22px;
-
-  border-radius: 30px;
-
-  background: #f2f2f2;
-
-  color: #666;
-
-  font-size: 14px;
-
-}
-
-.applications-card {
+  border: 1px solid rgba(211, 164, 113, .15);
 
   text-align: right;
 
 }
 
-.applications-card h2 {
+.profile-info h1 {
 
-  font-size: 21px;
+  color: #f0c99f;
 
-  margin: 0 0 25px;
+  font-size: 29px;
+
+  margin: 0 0 12px;
+
+}
+
+#profileUsername {
+
+  color: #c6a98e;
+
+  font-size: 16px;
+
+  margin: 0 0 22px;
+
+}
+
+.profile-badges {
+
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+}
+
+.membership-badge,
+
+.profile-role {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 10px 20px;
+
+  border-radius: 30px;
+
+  font-size: 14px;
+
+}
+
+.membership-badge {
+
+  background: rgba(150, 150, 150, .12);
+
+  color: #c6c6c6;
+
+  border: 1px solid rgba(180, 180, 180, .2);
+
+}
+
+.profile-role {
+
+  background: rgba(185, 138, 93, .12);
+
+  color: #e3bc92;
+
+  border: 1px solid rgba(185, 138, 93, .3);
+
+}
+
+.profile-discord-id {
+
+  color: #a98b72;
+
+  direction: ltr;
+
+  text-align: right;
+
+  font-size: 13px;
+
+  margin-top: 20px;
+
+}
+
+/* طلبات التقديم */
+
+.profile-applications {
+
+  margin-top: 40px;
+
+  padding: 0 15px;
+
+}
+
+.profile-applications h2 {
+
+  color: #f0c99f;
+
+  font-size: 27px;
+
+  margin: 0 0 28px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+}
+
+.profile-applications h2 span {
+
+  color: #c49a70;
+
+  font-size: 25px;
+
+}
+
+.applications-list {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 20px;
 
 }
 
 .applications-empty {
 
+  background: #28180f;
+
+  color: #c6a98e;
+
+  border: 1px solid rgba(211, 164, 113, .15);
+
+  border-radius: 15px;
+
+  padding: 35px 20px;
+
   text-align: center;
 
-  padding: 30px 10px;
-
-  color: #999;
-
-  background: #fafafa;
-
-  border-radius: 12px;
+  font-size: 16px;
 
 }
+
+/* الجوال */
 
 @media (max-width: 600px) {
 
   .profile-page {
 
-    padding: 30px 15px;
+    width: 94%;
+
+    padding: 25px 0 50px;
 
   }
 
-  .profile-card,
+  .profile-cover {
 
-  .applications-card {
+    min-height: 190px;
 
-    padding: 22px 16px;
+    padding: 25px;
+
+  }
+
+  .profile-avatar-frame {
+
+    width: 115px;
+
+    height: 115px;
+
+  }
+
+  .profile-info {
+
+    padding: 28px 22px;
+
+  }
+
+  .profile-info h1 {
+
+    font-size: 24px;
+
+  }
+
+  .profile-applications {
+
+    padding: 0 5px;
+
+  }
+
+  .profile-applications h2 {
+
+    font-size: 23px;
 
   }
 
