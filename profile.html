@@ -1,183 +1,258 @@
+
 <!DOCTYPE html>
-
 <html lang="ar" dir="rtl">
-
 <head>
-
   <meta charset="UTF-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>الملف الشخصي | AL-FORSAN</title>
-
   <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body class="profile-body">
 
   <main class="profile-page">
 
-    <!— صورة الحساب —>
-
+    <!-- صورة الحساب -->
     <section class="profile-cover">
-
       <div class="profile-avatar-frame">
-
-        <img
-
-          id="profileAvatar"
-
-          src=""
-
-          alt="صورة الحساب"
-
-        >
-
+        <img id="profileAvatar" src="" alt="صورة الحساب">
       </div>
-
     </section>
 
-    <!— معلومات العضو —>
-
+    <!-- معلومات العضو -->
     <section class="profile-info">
-
       <h1 id="profileName">جاري تحميل الحساب...</h1>
-
       <p id="profileUsername"></p>
 
       <div class="profile-badges">
-
         <span class="membership-badge" id="membershipStatus">
-
           عضو غير مفعل
-
         </span>
 
         <span class="profile-role">
-
           <span>♙</span>
-
           AL-FORSAN
-
         </span>
-
       </div>
 
       <p class="profile-discord-id" id="profileId"></p>
-
     </section>
 
-    <!— طلبات التقديم —>
-
+    <!-- طلبات التقديم -->
     <section class="profile-applications">
-
       <h2>
-
         <span>▤</span>
-
         طلبات التقديم
-
       </h2>
 
       <div id="applicationsList" class="applications-list">
-
         <div class="applications-empty">
-
-          سيظهر سجل طلباتك هنا بعد ربط نظام حفظ الطلبات.
-
+          جاري تحميل طلباتك...
         </div>
-
       </div>
-
     </section>
 
   </main>
 
   <script>
-
     async function loadProfile() {
-
       try {
-
         const response = await fetch(
-
-          '/.netlify/functions/discord-me'
-
+          "/.netlify/functions/discord-me"
         );
 
         if (!response.ok) {
-
-          throw new Error('تعذر الاتصال بالخادم');
-
+          throw new Error("تعذر الاتصال بالخادم");
         }
 
         const data = await response.json();
 
         if (!data.loggedIn || !data.user) {
-
-          window.location.href = '/';
-
+          window.location.href = "/";
           return;
-
         }
 
         const user = data.user;
 
-        // اسم الحساب
+        document.getElementById("profileName").textContent =
+          user.global_name || user.username || "مستخدم Discord";
 
-        document.getElementById('profileName').textContent =
+        document.getElementById("profileUsername").textContent =
+          user.username ? "@" + user.username : "";
 
-          user.global_name || user.username || 'مستخدم Discord';
+        document.getElementById("profileId").textContent =
+          "Discord ID: " + user.id;
 
-        // اسم المستخدم
-
-        document.getElementById('profileUsername').textContent =
-
-          user.username || '';
-
-        // رقم ديسكورد
-
-        document.getElementById('profileId').textContent =
-
-          'Discord ID: ' + user.id;
-
-        // صورة الحساب
-
-        const avatar = document.getElementById('profileAvatar');
+        const avatar = document.getElementById("profileAvatar");
 
         if (user.avatar) {
+          const extension = user.avatar.startsWith("a_") ? "gif" : "png";
 
           avatar.src =
-
-            `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=256`;
-
+            `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${extension}?size=256`;
         } else {
-
           const defaultAvatar = Number(user.discriminator || 0) % 5;
 
           avatar.src =
-
             `https://cdn.discordapp.com/embed/avatars/${defaultAvatar}.png`;
-
         }
 
+        await loadApplications();
+
       } catch (error) {
+        console.error("Profile Error:", error);
 
-        console.error('Profile Error:', error);
+        document.getElementById("profileName").textContent =
+          "تعذر تحميل بيانات الحساب";
 
-        document.getElementById('profileName').textContent =
+        document.getElementById("applicationsList").textContent =
+          "تعذر تحميل البيانات، حاولي تحديث الصفحة.";
+      }
+    }
 
-          'تعذر تحميل بيانات الحساب';
-
+    function getApplicationStatus(application) {
+      if (application.interview_status === "accepted") {
+        return {
+          text: "تم القبول النهائي",
+          membership: "عضو مفعل"
+        };
       }
 
+      if (application.interview_status === "rejected") {
+        return {
+          text: "مرفوض بعد المقابلة",
+          membership: "عضو غير مفعل"
+        };
+      }
+
+      if (application.interview_status === "pending") {
+        return {
+          text: "بانتظار المقابلة الصوتية",
+          membership: "عضو غير مفعل"
+        };
+      }
+
+      if (application.status === "accepted") {
+        return {
+          text: "تم اجتياز الأسئلة",
+          membership: "عضو غير مفعل"
+        };
+      }
+
+      if (application.status === "rejected") {
+        return {
+          text: "مرفوض",
+          membership: "عضو غير مفعل"
+        };
+      }
+
+      return {
+        text: "قيد المراجعة",
+        membership: "عضو غير مفعل"
+      };
+    }
+
+    async function loadApplications() {
+      const list = document.getElementById("applicationsList");
+
+      try {
+        const response = await fetch(
+          "/.netlify/functions/my-applications"
+        );
+
+        if (!response.ok) {
+          throw new Error("تعذر تحميل الطلبات");
+        }
+
+        const data = await response.json();
+        const applications = data.applications || [];
+
+        list.replaceChildren();
+
+        if (applications.length === 0) {
+          const empty = document.createElement("div");
+          empty.className = "applications-empty";
+          empty.textContent = "لا توجد طلبات تقديم";
+          list.appendChild(empty);
+
+          document.getElementById("membershipStatus").textContent =
+            "عضو غير مفعل";
+
+          return;
+        }
+
+        const hasActiveMembership = applications.some(
+          application =>
+            application.interview_status === "accepted"
+        );
+
+        document.getElementById("membershipStatus").textContent =
+          hasActiveMembership ? "عضو مفعل" : "عضو غير مفعل";
+
+        applications.forEach(application => {
+          const status = getApplicationStatus(application);
+
+          const card = document.createElement("article");
+          card.className = "application-card";
+
+          const heading = document.createElement("h3");
+          heading.textContent =
+            "طلب تقديم رقم " + application.id;
+
+          const statusElement = document.createElement("p");
+          statusElement.className = "application-status";
+          statusElement.textContent = "الحالة: " + status.text;
+
+          const date = document.createElement("p");
+          date.className = "application-date";
+          date.textContent =
+            "تاريخ التقديم: " +
+            new Date(application.created_at).toLocaleDateString("ar-SA");
+
+          const answersTitle = document.createElement("h4");
+          answersTitle.textContent = "إجابات الطلب";
+
+          const answersContainer = document.createElement("div");
+          answersContainer.className = "application-answers";
+
+          Object.entries(application.answers || {}).forEach(
+            ([question, answer]) => {
+              const item = document.createElement("div");
+              item.className = "application-answer";
+
+              const questionElement = document.createElement("strong");
+              questionElement.textContent = question;
+
+              const answerElement = document.createElement("p");
+              answerElement.textContent =
+                String(answer || "لم تتم الإجابة");
+
+              item.append(questionElement, answerElement);
+              answersContainer.appendChild(item);
+            }
+          );
+
+          card.append(
+            heading,
+            statusElement,
+            date,
+            answersTitle,
+            answersContainer
+          );
+
+          list.appendChild(card);
+        });
+
+      } catch (error) {
+        console.error("Applications Error:", error);
+
+        list.textContent =
+          "تعذر تحميل طلبات التقديم، حاولي تحديث الصفحة.";
+      }
     }
 
     loadProfile();
-
   </script>
 
 </body>
-
 </html>
