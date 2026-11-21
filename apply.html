@@ -703,7 +703,7 @@ message.textContent = "تم إرسال طلبك بنجاح! ";
 
 this.reset();
 } catch (error) {
-message.textContent = error.message || "تعذر إرسال الطلب، حاولي مرة أخرى.";
+message.textContent = error.message || "تعذر إرسال الطلب، حاول مرة أخرى.";
 } finally {
 if (submitButton) submitButton.disabled = false;
 }
