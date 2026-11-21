@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html lang="ar" dir="rtl">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>الملف الشخصي | AL-FORSAN</title>
+
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+  <main class="profile-page">
+
+    <div class="profile-container">
+
+      <section class="profile-card">
+
+        <div class="profile-avatar">
+
+          <img id="profileAvatar" src="" alt="صورة الحساب">
+
+        </div>
+
+        <h1 id="profileName">جاري تحميل الحساب...</h1>
+
+        <p id="profileId"></p>
+
+        <div class="membership-status">
+
+          عضو غير مفعل
+
+        </div>
+
+      </section>
+
+      <section class="applications-card">
+
+        <h2>طلبات التقديم</h2>
+
+        <p class="applications-empty">لا توجد طلبات تقديم</p>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <script>
+
+    async function loadProfile() {
+
+      try {
+
+        const response = await fetch('/.netlify/functions/discord-me');
+
+        const data = await response.json();
+
+        if (!data.loggedIn || !data.user) {
+
+          window.location.href = '/';
+
+          return;
+
+        }
+
+        const user = data.user;
+
+        const name = user.global_name || user.username;
+
+        document.getElementById('profileName').textContent = name;
+
+        document.getElementById('profileId').textContent =
+
+          'Discord ID: ' + user.id;
+
+        if (user.avatar) {
+
+          document.getElementById('profileAvatar').src =
+
+            `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=256`;
+
+        } else {
+
+          document.getElementById('profileAvatar').src =
+
+            'https://cdn.discordapp.com/embed/avatars/0.png';
+
+        }
+
+      } catch (error) {
+
+        document.getElementById('profileName').textContent =
+
+          'تعذر تحميل بيانات الحساب';
+
+      }
+
+    }
+
+    loadProfile();
+
+  </script>
+
+</body>
+
+</html>

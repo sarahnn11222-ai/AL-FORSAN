@@ -1773,3 +1773,150 @@ header.header .discord-btn {
 #homeHeroButtons.logged-in #homeDiscordLoginBtn {
   display: none !important;
 }
+/* ===== Profile Page ===== */
+
+.profile-page {
+
+  min-height: 80vh;
+
+  padding: 60px 20px;
+
+}
+
+.profile-container {
+
+  width: 100%;
+
+  max-width: 850px;
+
+  margin: 0 auto;
+
+}
+
+.profile-card,
+
+.applications-card {
+
+  background: #fff;
+
+  border: 1px solid #e8e8e8;
+
+  border-radius: 18px;
+
+  padding: 30px;
+
+  margin-bottom: 25px;
+
+  text-align: center;
+
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+
+}
+
+.profile-avatar {
+
+  width: 110px;
+
+  height: 110px;
+
+  margin: 0 auto 18px;
+
+  border-radius: 50%;
+
+  overflow: hidden;
+
+  background: #eee;
+
+}
+
+.profile-avatar img {
+
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+
+}
+
+.profile-card h1 {
+
+  font-size: 24px;
+
+  margin: 10px 0;
+
+}
+
+#profileId {
+
+  color: #888;
+
+  font-size: 13px;
+
+  direction: ltr;
+
+}
+
+.membership-status {
+
+  display: inline-block;
+
+  margin-top: 15px;
+
+  padding: 9px 22px;
+
+  border-radius: 30px;
+
+  background: #f2f2f2;
+
+  color: #666;
+
+  font-size: 14px;
+
+}
+
+.applications-card {
+
+  text-align: right;
+
+}
+
+.applications-card h2 {
+
+  font-size: 21px;
+
+  margin: 0 0 25px;
+
+}
+
+.applications-empty {
+
+  text-align: center;
+
+  padding: 30px 10px;
+
+  color: #999;
+
+  background: #fafafa;
+
+  border-radius: 12px;
+
+}
+
+@media (max-width: 600px) {
+
+  .profile-page {
+
+    padding: 30px 15px;
+
+  }
+
+  .profile-card,
+
+  .applications-card {
+
+    padding: 22px 16px;
+
+  }
+
+}
